@@ -18,6 +18,8 @@
 		18DCF5231D5AD6C1006A2A14 /* register.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 18DCF5221D5AD6C1006A2A14 /* register.storyboard */; };
 		18DCF5261D5AD7E1006A2A14 /* registerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 18DCF5251D5AD7E1006A2A14 /* registerViewController.m */; };
 		18DCF5291D5B5247006A2A14 /* UIButton+backImage.m in Sources */ = {isa = PBXBuildFile; fileRef = 18DCF5281D5B5247006A2A14 /* UIButton+backImage.m */; };
+		18DCF52B1D5C197F006A2A14 /* check.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 18DCF52A1D5C197F006A2A14 /* check.storyboard */; };
+		18DCF52E1D5C1992006A2A14 /* checkViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 18DCF52D1D5C1992006A2A14 /* checkViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -59,6 +61,9 @@
 		18DCF5251D5AD7E1006A2A14 /* registerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = registerViewController.m; sourceTree = "<group>"; };
 		18DCF5271D5B5247006A2A14 /* UIButton+backImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIButton+backImage.h"; sourceTree = "<group>"; };
 		18DCF5281D5B5247006A2A14 /* UIButton+backImage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIButton+backImage.m"; sourceTree = "<group>"; };
+		18DCF52A1D5C197F006A2A14 /* check.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = check.storyboard; sourceTree = "<group>"; };
+		18DCF52C1D5C1992006A2A14 /* checkViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = checkViewController.h; sourceTree = "<group>"; };
+		18DCF52D1D5C1992006A2A14 /* checkViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = checkViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -205,6 +210,9 @@
 				18DCF5221D5AD6C1006A2A14 /* register.storyboard */,
 				18DCF5241D5AD7E1006A2A14 /* registerViewController.h */,
 				18DCF5251D5AD7E1006A2A14 /* registerViewController.m */,
+				18DCF52A1D5C197F006A2A14 /* check.storyboard */,
+				18DCF52C1D5C1992006A2A14 /* checkViewController.h */,
+				18DCF52D1D5C1992006A2A14 /* checkViewController.m */,
 			);
 			name = "登录界面";
 			sourceTree = "<group>";
@@ -315,6 +323,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				18DCF52B1D5C197F006A2A14 /* check.storyboard in Resources */,
 				18DCF4F81D5AA201006A2A14 /* LaunchScreen.storyboard in Resources */,
 				18DCF4F51D5AA201006A2A14 /* Assets.xcassets in Resources */,
 				18DCF4F31D5AA201006A2A14 /* Main.storyboard in Resources */,
@@ -344,6 +353,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				18DCF4F01D5AA201006A2A14 /* ViewController.m in Sources */,
+				18DCF52E1D5C1992006A2A14 /* checkViewController.m in Sources */,
 				18DCF4ED1D5AA201006A2A14 /* AppDelegate.m in Sources */,
 				18DCF5291D5B5247006A2A14 /* UIButton+backImage.m in Sources */,
 				18DCF4EA1D5AA201006A2A14 /* main.m in Sources */,
