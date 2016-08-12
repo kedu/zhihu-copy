@@ -7,6 +7,7 @@
 //
 
 #import "AppDelegate.h"
+#import "registerViewController.h"
 
 @interface AppDelegate ()
 
@@ -16,6 +17,18 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
+
+    self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+    self.window.backgroundColor = [UIColor whiteColor];
+    UIStoryboard*story=[UIStoryboard storyboardWithName:@"register" bundle:nil];
+    
+    registerViewController*reg=[story instantiateViewControllerWithIdentifier:@"register"];
+    
+    UINavigationController*nav=[[UINavigationController alloc]initWithRootViewController:reg];
+    
+    _window.rootViewController=nav;
+    
+    [_window makeKeyAndVisible];
     return YES;
 }
 

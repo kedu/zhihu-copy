@@ -9,5 +9,5 @@
 #import <UIKit/UIKit.h>
 
 @interface registerViewController : UIViewController
-
+@property (weak, nonatomic) IBOutlet UITextField *phoneNum;//号码
 @end

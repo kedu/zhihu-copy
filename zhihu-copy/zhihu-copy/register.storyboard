@@ -8,7 +8,7 @@
         <!--Register View Controller-->
         <scene sceneID="ZUT-5Z-rdY">
             <objects>
-                <viewController id="E5j-n4-qlZ" customClass="registerViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="register" useStoryboardIdentifierAsRestorationIdentifier="YES" id="E5j-n4-qlZ" customClass="registerViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="Xkk-c8-ieC"/>
                         <viewControllerLayoutGuide type="bottom" id="Yex-fe-dAt"/>
@@ -107,6 +107,7 @@
                             <constraint firstItem="JjA-Az-XBH" firstAttribute="leading" secondItem="osg-zl-Xod" secondAttribute="leading" id="zN8-K0-Hh3"/>
                         </constraints>
                     </view>
+                    <navigationItem key="navigationItem" id="ZJn-bQ-GgX"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                     <connections>
                         <outlet property="name" destination="osg-zl-Xod" id="P0K-Xf-r2s"/>
@@ -118,7 +119,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="mk4-kJ-xGm" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-230.5" y="217.5"/>
+            <point key="canvasLocation" x="749.5" y="257.5"/>
         </scene>
     </scenes>
 </document>

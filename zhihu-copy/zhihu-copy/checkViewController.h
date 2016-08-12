@@ -7,7 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
-
+#import  "registerViewController.h"
 @interface checkViewController : UIViewController
+@property(nonatomic,strong)registerViewController*registe;
+
 
 @end

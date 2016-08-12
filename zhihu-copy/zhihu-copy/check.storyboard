@@ -3,12 +3,13 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
-        <!--View Controller-->
+        <!--Check View Controller-->
         <scene sceneID="AzY-AY-hs0">
             <objects>
-                <viewController id="jp3-NB-9mN" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="IDENTIFIER" useStoryboardIdentifierAsRestorationIdentifier="YES" id="jp3-NB-9mN" customClass="checkViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="Rmj-95-7eO"/>
                         <viewControllerLayoutGuide type="bottom" id="sJe-Yj-LGd"/>
@@ -37,19 +38,46 @@
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="13t-b7-UUh">
                                 <rect key="frame" x="106" y="269" width="137" height="30"/>
                                 <state key="normal" title="完成"/>
+                                <connections>
+                                    <action selector="end:" destination="jp3-NB-9mN" eventType="touchUpInside" id="YFz-M5-SNM"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7cn-Fz-Byd">
                                 <rect key="frame" x="102" y="333" width="170" height="30"/>
                                 <state key="normal" title="重新发送验证码"/>
+                                <connections>
+                                    <action selector="restart:" destination="jp3-NB-9mN" eventType="touchUpInside" id="VnH-I7-IEj"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hFD-JV-qfs">
+                                <rect key="frame" x="-4" y="40" width="46" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="2OP-sC-Svu"/>
+                                    <constraint firstAttribute="width" constant="46" id="cfl-15-cZY"/>
+                                </constraints>
+                                <state key="normal" title="返回"/>
+                                <connections>
+                                    <action selector="back:" destination="jp3-NB-9mN" eventType="touchUpInside" id="7eB-q9-2Za"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="hFD-JV-qfs" firstAttribute="leading" secondItem="gPs-CJ-58E" secondAttribute="leadingMargin" constant="-20" id="4wK-aa-8br"/>
+                            <constraint firstItem="hFD-JV-qfs" firstAttribute="top" secondItem="Rmj-95-7eO" secondAttribute="bottom" constant="20" id="Ram-GG-Xo7"/>
+                        </constraints>
                     </view>
+                    <toolbarItems/>
+                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
+                    <connections>
+                        <outlet property="check_messsage" destination="efw-1l-nos" id="aJf-BO-7LU"/>
+                        <outlet property="send2num" destination="YJE-Ge-Ggd" id="7UO-3c-VMq"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="B5G-dw-NH8" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="116.5" y="61.5"/>
+            <point key="canvasLocation" x="282.5" y="-159.5"/>
         </scene>
     </scenes>
 </document>
