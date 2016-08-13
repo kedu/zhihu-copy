@@ -46,7 +46,8 @@
     [center addObserver:self selector:@selector(textValueChanged:) name:UITextFieldTextDidChangeNotification object:self.name];
     [center addObserver:self selector:@selector(textValueChanged:) name:UITextFieldTextDidChangeNotification object:self.passWord];
     [center addObserver:self selector:@selector(textValueChanged:) name:UITextFieldTextDidChangeNotification object:self.phoneNum];
-
+    NSData*data=[self network:@"https://api.zhihu.com/captcha" with:@"Cookie: capsion_ticket=\"2|1:0|10:1470999083|14:capsion_ticket|44:ZTFhN2E5NTNmZmU0NDQ3MDg4N2YxMjUwNmU4NzY1Yjk=|ae8b71f2203366c8e3d4f0c4c8083a676899adb0d280f16b2fa756a4a57bd9de\"; d_c0=AIBAB9SyXApLBWRhdNEy_pV8BGK2g9TVeJs=|1471048612"];
+    NSLog(@"%@",data);
 }
 - (void)textValueChanged:(NSNotification *)notice
 {
@@ -107,9 +108,10 @@
     [request setValue:@" release" forHTTPHeaderField:@"X-APP-Build"];
     [request setValue:@" 3.20.1" forHTTPHeaderField:@"X-APP-VERSION"];
     //
-//    NSTimeInterval interval = [[NSDate date] timeIntervalSince1970] ;
-//    NSString*cookie_str=[NSString stringWithFormat:@"capsion_ticket=\"2|1:0|10:%.0f|14:capsion_ticket|44:ZDdiNTAxYjBmYjIzNDQxNDg3YmIwODJhZDUzMTEwODQ=|0cfee135ded961fb1dc01dbac9abb36a320d93fd73b945367deb3c9f42d325fd\"; d_c0=AIBAB9SyXApLBWRhdNEy_pV8BGK2g9TVeJs=|1470869897",interval];
-//    [request setValue:cookie_str forHTTPHeaderField:@"Cookie"];
+    NSTimeInterval interval = [[NSDate date] timeIntervalSince1970] ;
+    NSLog(@"%.0f",interval);
+    NSString*cookie_str=[NSString stringWithFormat:@"capsion_ticket=\"2|1:0|10:%.0f|14:capsion_ticket|44:ZTFhN2E5NTNmZmU0NDQ3MDg4N2YxMjUwNmU4NzY1Yjk=|ae8b71f2203366c8e3d4f0c4c8083a676899adb0d280f16b2fa756a4a57bd9de\"; d_c0=AIBAB9SyXApLBWRhdNEy_pV8BGK2g9TVeJs=|1471048612",interval];
+    [request setValue:cookie_str forHTTPHeaderField:@"Cookie"];
     // 2. 发送请求 // POST 请求只能使用下面这个方法!
     NSURLSession *session = [NSURLSession sessionWithConfiguration:[NSURLSessionConfiguration defaultSessionConfiguration] delegate:self delegateQueue:[NSOperationQueue mainQueue]];
     //
@@ -126,6 +128,51 @@
         [self alert];
         //如果返回True,跳转到输入验证码界面
     }] resume];
+}
+-(NSData*)network:(NSString*)url_str with:(NSString*)request_body_str{
+    NSString*urlStr=url_str;
+    NSURL*url=[NSURL URLWithString:urlStr];
+    //post
+    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
+    // 设置请求方法为 POST ; 默认情况下,所有的请求都是 GET 请求.
+    request.HTTPMethod = @"POST";
+    // POST 请求的参数,都是放在请求体中的! 注意:请求体式二进制数据!
+    // 设置请求体内容:
+    NSString *str =request_body_str;
+    // 将请求体字符串转换成二进制数据
+    NSData *data = [str dataUsingEncoding:NSUTF8StringEncoding];
+    request.HTTPBody = data;
+    NSLog(@"%@",[[NSString alloc]initWithData:data encoding:NSUTF8StringEncoding]);
+    [request setValue:@"application/x-www-form-urlencoded; charset=utf-8" forHTTPHeaderField:@"content-type"];//请求头
+    [request setValue:@"AIBAB9SyXApLBWRhdNEy_pV8BGK2g9TVeJs=" forHTTPHeaderField:@"X-UDID"];
+    [request setValue:@"oauth 5774b305d2ae4469a2c9258956ea49" forHTTPHeaderField:@"Authorization"];
+    [request setValue:@" keep-alive" forHTTPHeaderField:@"Proxy-Connection"];
+    [request setValue:@" OS=iOS&Release=9.3.3&Model=iPad5,4&VersionName=3.20.1&VersionCode=482&Width=2048&Height=1536" forHTTPHeaderField:@"x-app-za"];
+    [request setValue:@" zh-cn" forHTTPHeaderField:@"Accept-Language"];
+    [request setValue:@" 3.0.23" forHTTPHeaderField:@"X-API-Version"];
+    [request setValue:@" osee2unifiedRelease/482 CFNetwork/758.5.3 Darwin/15.6.0" forHTTPHeaderField:@"User-Agent"];
+    [request setValue:@" release" forHTTPHeaderField:@"X-APP-Build"];
+    [request setValue:@" 3.20.1" forHTTPHeaderField:@"X-APP-VERSION"];
+    //
+    NSTimeInterval interval = [[NSDate date] timeIntervalSince1970] ;
+    NSLog(@"%.0f",interval);
+    NSString*cookie_str=[NSString stringWithFormat:@"capsion_ticket=\"2|1:0|10:%.0f|14:capsion_ticket|44:ZTFhN2E5NTNmZmU0NDQ3MDg4N2YxMjUwNmU4NzY1Yjk=|ae8b71f2203366c8e3d4f0c4c8083a676899adb0d280f16b2fa756a4a57bd9de\"; d_c0=AIBAB9SyXApLBWRhdNEy_pV8BGK2g9TVeJs=|1471048612",interval];
+    [request setValue:cookie_str forHTTPHeaderField:@"Cookie"];
+     // 2. 发送请求 // POST 请求只能使用下面这个方法!
+    NSURLSession *session = [NSURLSession sessionWithConfiguration:[NSURLSessionConfiguration defaultSessionConfiguration] delegate:self delegateQueue:[NSOperationQueue mainQueue]];
+    //
+    [[ session  dataTaskWithRequest:request completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+        //
+        NSLog(@"data:%@",[[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding]);
+        //        self.data=[NSDictionary dictionaryWithObject:[[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding] forKey:@"data"];
+        self.data = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableLeaves error:nil];
+        NSLog(@"%@",self.data);
+        //有问题就弹出提示框
+        [self alert];
+        //如果返回True,跳转到输入验证码界面
+    }] resume];
+
+    return data;
 }
 -(void)alert{
     NSString*fullname=self.data[@"fullname"][@"message"];
@@ -206,8 +253,11 @@
     //
     NSTimeInterval interval = [[NSDate date] timeIntervalSince1970] ;
     NSLog(@"%.0f",interval);
-    NSString*cookie_str=[NSString stringWithFormat:@"capsion_ticket=\"2|1:0|10:%.0f|14:capsion_ticket|44:ZDdiNTAxYjBmYjIzNDQxNDg3YmIwODJhZDUzMTEwODQ=|0cfee135ded961fb1dc01dbac9abb36a320d93fd73b945367deb3c9f42d325fd\"; d_c0=AIBAB9SyXApLBWRhdNEy_pV8BGK2g9TVeJs=|1470869897",interval];
-//       NSString*cookie_str=[NSString stringWithFormat:@"capsion_ticket=\"2|1:0|10:1470993871|14:capsion_ticket|44:ZDdiNTAxYjBmYjIzNDQxNDg3YmIwODJhZDUzMTEwODQ=|0cfee135ded961fb1dc01dbac9abb36a320d93fd73b945367deb3c9f42d325fd\"; d_c0=AIBAB9SyXApLBWRhdNEy_pV8BGK2g9TVeJs=|1470869897"];
+    NSString*cookie_str=[NSString stringWithFormat:@"capsion_ticket=\"2|1:0|10:%.0f|14:capsion_ticket|44:ZTFhN2E5NTNmZmU0NDQ3MDg4N2YxMjUwNmU4NzY1Yjk=|ae8b71f2203366c8e3d4f0c4c8083a676899adb0d280f16b2fa756a4a57bd9de\"; d_c0=AIBAB9SyXApLBWRhdNEy_pV8BGK2g9TVeJs=|%.0f",interval,interval];
+//       NSString*cookie_str=[NSString stringWithFormat:@"capsion_ticket=\"2|1:0|10:1470999083|14:capsion_ticket|44:ZTFhN2E5NTNmZmU0NDQ3MDg4N2YxMjUwNmU4NzY1Yjk=|ae8b71f2203366c8e3d4f0c4c8083a676899adb0d280f16b2fa756a4a57bd9de\"; d_c0=AIBAB9SyXApLBWRhdNEy_pV8BGK2g9TVeJs=|1471048612"];
+    //我直接照抄 说 验证码已经过期  改下时间说缺少验证码票据
+    //说明有比对
+    //不知道哪里发送的
     //1470999902334
     //1470993871
     //1471000010
@@ -223,7 +273,35 @@
     //感觉是两个MD5值在这  一般是要加盐的,可盐不知道...
     //Cookie: capsion_ticket="2|1:0|10:1470987145|14:capsion_ticket|44:MzE4ZTRiZjZmZmEyNDM4ZTllMTM2ZjUxMDI0ZDM0MTk=|6956945099ea63a08bb2d2958dd1fdc9bace9f87f57d5a7b7e12331acae21525"; d_c0=AIBAB9SyXApLBWRhdNEy_pV8BGK2g9TVeJs=|1470869897
     //Cookie: capsion_ticket="2|1:0|10:1470999083|14:capsion_ticket|44:ZTFhN2E5NTNmZmU0NDQ3MDg4N2YxMjUwNmU4NzY1Yjk=|ae8b71f2203366c8e3d4f0c4c8083a676899adb0d280f16b2fa756a4a57bd9de"; d_c0=AIBAB9SyXApLBWRhdNEy_pV8BGK2g9TVeJs=|1470869897
-    
+    //一打开app
+    //https://api.zhihu.com/patch?if_modified_since=1470801745&platform=iOS&version_code=482
+    //感觉是说补丁是否修改,应该是检查是否需要更新
+    //1470801745  2016/8/10 12:2:25
+    //1470999083  2016/8/12 18:51:23
+    //capsion_ticket="2|1:0|10:1470999083|14:capsion_ticket|44:ZTFhN2E5NTNmZmU0NDQ3MDg4N2YxMjUwNmU4NzY1Yjk=|ae8b71f2203366c8e3d4f0c4c8083a676899adb0d280f16b2fa756a4a57bd9de"
+    //https://api.zhihu.com/captcha   这个是验证码网站
+    //1471048612  2016/8/13 8:36:52 现在时间
+    // capsion_ticket="2|1:0|10:1470999083|14:capsion_ticket|44:ZTFhN2E5NTNmZmU0NDQ3MDg4N2YxMjUwNmU4NzY1Yjk=|ae8b71f2203366c8e3d4f0c4c8083a676899adb0d280f16b2fa756a4a57bd9de"; d_c0=AIBAB9SyXApLBWRhdNEy_pV8BGK2g9TVeJs=|1471048612
+//0cfee135ded961fb1dc01dbac9abb36a
+//ae8b71f2203366c8e3d4f0c4c8083a67   6899adb0d280f16b2fa756a4a57bd9de
+//AIBAB9SyXApLBWRhdNEy_pV8BGK2g9TVeJs=有等号 感觉是base64加密  网站解密为@Բ\KdatѲ_5^&
+    //如果是这样,这d_c0可以不用管
+    //
+    //https://api.zhihu.com/app_config?build=release&os_version=9.3.3&platform=ios&resolution=2048x1536&version=3.20.1&version_code=482
+    //capsion_ticket="2|1:0|10:1470999083|14:capsion_ticket|44:ZTFhN2E5NTNmZmU0NDQ3MDg4N2YxMjUwNmU4NzY1Yjk=|ae8b71f2203366c8e3d4f0c4c8083a676899adb0d280f16b2fa756a4a57bd9de"
+    //https://api.zhihu.com/ip_domestic
+    //capsion_ticket="2|1:0|10:1470999083|14:capsion_ticket|44:ZTFhN2E5NTNmZmU0NDQ3MDg4N2YxMjUwNmU4NzY1Yjk=|ae8b71f2203366c8e3d4f0c4c8083a676899adb0d280f16b2fa756a4a57bd9de"; d_c0=AIBAB9SyXApLBWRhdNEy_pV8BGK2g9TVeJs=|1471048612
+    //https://api.zhihu.com/app_config?build=release&os_version=9.3.3&platform=ios&resolution=2048x1536&version=3.20.1&version_code=482
+    //这里开始有区别了  用的是现在时间  两个参数变了 dc_0倒是没变
+    //上面是开头用以前时间  后面用自己时间  这里都是自己时间
+    //capsion_ticket="2|1:0|10:1471048612|14:capsion_ticket|44:NTIzMTRiMzkxNGU1NDQ2ZGI0YTIzNjJlNmE4NWQ4NGM=|17e778adeac4f0de33f1a74faa2b32f4a9cf5c3c9632ea142fe2c5b32eb85f6c"; d_c0=AIBAB9SyXApLBWRhdNEy_pV8BGK2g9TVeJs=|1471048612
+   //https://api.zhihu.com/app_config?build=release&os_version=9.3.3&platform=ios&resolution=2048x1536&version=3.20.1&version_code=482
+    //capsion_ticket="2|1:0|10:1471048612|14:capsion_ticket|44:NTIzMTRiMzkxNGU1NDQ2ZGI0YTIzNjJlNmE4NWQ4NGM=|17e778adeac4f0de33f1a74faa2b32f4a9cf5c3c9632ea142fe2c5b32eb85f6c"; d_c0=AIBAB9SyXApLBWRhdNEy_pV8BGK2g9TVeJs=|1471048612
+    //点击注册
+    //https://api.zhihu.com/validate/register_form
+    //sms
+    //https://api.zhihu.com/sms/digits  点击这个和 https://api.zhihu.com/captcha  一样
+    //给https://api.zhihu.com/captcha 也发送一下
     [request setValue:cookie_str forHTTPHeaderField:@"Cookie"];
     
     // 2. 发送请求 // POST 请求只能使用下面这个方法!
